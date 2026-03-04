@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 
-    @yield('customeCss')
+    @yield('customCss')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -286,7 +286,7 @@
     <script src="dist/js/demo.js"></script>
 
     <script src="dist/js/pages/dashboard.js"></script>
-    @yield('customeJs')
+    @yield('customJs')
 </body>
 
 </html>

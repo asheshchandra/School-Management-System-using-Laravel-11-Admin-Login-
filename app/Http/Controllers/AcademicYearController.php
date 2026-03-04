@@ -34,6 +34,13 @@ class AcademicYearController extends Controller
 
     public function edit($id){
         $data['academic_year']=AcademicYear::find($id);
-        return view('admin.edit_academic_year');
+        return view('admin.edit_academic_year', $data);
+    }
+
+    public function update(Request $request){
+        $data = AcademicYear::find($request->id);
+        $data->name = $request->name;
+        $data->update();
+        return redirect()->route('academic-year.read')->with('success', 'Academic Year Updated Successfully');
     }
 }

@@ -58,7 +58,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->created_at }}</td>
-                    <td><a href="#" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ route('academic-year.edit', $item->id) }}" class="btn btn-primary">Edit</a></td>
                     <td><a href="{{ route('academic-year.delete', $item->id) }}" onclick="return confirm('Are you sure you want to delete this academic year?')" class="btn btn-danger">Delete</a></td>
                   </tr>
                 @endforeach
@@ -104,4 +104,24 @@
 <script src="dist/js/adminlte.min2167.js?v=3.2.0"></script>
 
 <script src="dist/js/demo.js"></script>
+
+<script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 @endsection
