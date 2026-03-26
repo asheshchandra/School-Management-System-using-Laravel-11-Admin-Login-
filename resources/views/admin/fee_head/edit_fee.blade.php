@@ -42,7 +42,8 @@
             @enderror
 
             <form action="{{ route('fee-head.update') }}" method="post">
-              @csrf <div class="card-body">
+              @csrf 
+              <div class="card-body">
                 <input type="hidden" name="id" value="{{ $fee->id }}">
                 <div class="form-group">
                   <label for="name">Fee Head</label>

@@ -260,7 +260,7 @@
                         <!-- Fee Head -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-graduation-cap"></i>
+                                <i class="nav-icon fas fa-money-bill-wave"></i>
                                 <p>
                                     Fee Head
                                     <i class="right fas fa-angle-left"></i>
@@ -277,6 +277,31 @@
                                     <a href="{{ route('fee-head.read') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>View Fee Heads</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Fee Structure -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-money-check-alt"></i>
+                                <p>
+                                    Fee Structure
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('fee-structure.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Record</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('fee-structure.read') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Record</p>
                                     </a>
                                 </li>
                             </ul>
