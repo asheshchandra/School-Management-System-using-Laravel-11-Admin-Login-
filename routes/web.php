@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\FeeHeadController;
 use App\Http\Controllers\FeeStructureController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AcademicYearController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,5 +80,18 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/fee-structure/delete/{id}', [FeeStructureController::class, 'delete'])->name('fee-structure.delete');
 
         Route::post('/fee-structure/update/{id}', [FeeStructureController::class, 'update'])->name('fee-structure.update');
+
+        //Student Management
+        Route::get('/student/create', [StudentController::class, 'index'])->name('student.create');
+
+        Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
+
+        Route::get('/student/read', [StudentController::class, 'read'])->name('student.read');
+
+        Route::get('/student/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+
+        Route::post('/student/update', [StudentController::class, 'update'])->name('student.update');
+
+        Route::get('/student/delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
     });
 });

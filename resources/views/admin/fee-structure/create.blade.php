@@ -36,10 +36,6 @@
                             <h3 class="card-title">Add Fee Structure</h3>
                         </div>
 
-                        @error('name')
-                        <p class="text-danger">{{ $message }}</p>
-                        @enderror
-
                         <form action="{{ route('fee-structure.store') }}" method="post">
                             @csrf
                             <div class="card-body">
