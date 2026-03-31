@@ -1,16 +1,35 @@
 <?php
 
+use App\Http\Controllers\StudentAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\FeeHeadController;
 use App\Http\Controllers\FeeStructureController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\AnnounementController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Student Login
+Route::group(['prefix' => 'student'], function () {
+    // guest
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login', [StudentAuthController::class, 'index'])->name('student.login');
+        Route::post('/login', [StudentAuthController::class, 'authenticate'])->name('student.authenticate');
+    });
+    // auth
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('student.dashboard');
+        Route::get('/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
+        Route::get('/change-password', [StudentAuthController::class, 'changePassword'])->name('student.change-password');
+        Route::post('/update-password', [StudentAuthController::class, 'updatePassword'])->name('student.updatePassword');
+    });
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin.guest'], function () {
         Route::get('/login', [AdminController::class, 'index'])->name('admin.login');
@@ -41,6 +60,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/academic-year/edit/{id}', [AcademicYearController::class, 'edit'])->name('academic-year.edit');
 
         Route::post('/academic-year/update', [AcademicYearController::class, 'update'])->name('academic-year.update');
+
+        //Announement Management
+        Route::get('/announement/create', [AnnounementController::class, 'index'])->name('announement.create');
+        Route::post('/announement/store', [AnnounementController::class, 'store'])->name('announement.store');
+        Route::get('/announement/read', [AnnounementController::class, 'read'])->name('announement.read');
 
         //Class Management
         Route::get('/class/create', [ClassesController::class, 'index'])->name('class.create');

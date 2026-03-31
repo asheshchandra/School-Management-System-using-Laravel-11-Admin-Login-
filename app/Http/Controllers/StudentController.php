@@ -52,10 +52,17 @@ class StudentController extends Controller
         return redirect()->back()->with('success', 'Student created successfully');
     }
 
-    public function read()
+    public function read(Request $request)
     {
-        $query = User::with(['studentClass', 'studentAcademicYear'])->where('role', 'student')->latest('id')->get();
-        $data['students'] = $query;
+        $query = User::with(['studentClass', 'studentAcademicYear'])->where('role', 'student')->latest('id');
+        if($request->filled('academic_year_id')){
+            $query->where('academic_year_id', $request->academic_year_id);
+        }
+        if($request->filled('class_id')){
+            $query->where('class_id', $request->class_id);
+        }
+        $students = $query->get();
+        $data['students'] = $students;
         $data['classes'] = Classes::all();
         $data['academic_years'] = AcademicYear::all();
         return view('admin.student.student_list', $data);
