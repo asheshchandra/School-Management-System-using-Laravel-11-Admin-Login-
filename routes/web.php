@@ -8,6 +8,8 @@ use App\Http\Controllers\FeeStructureController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AnnounementController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\AssignSubjectToClassController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -65,6 +67,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/announement/create', [AnnounementController::class, 'index'])->name('announement.create');
         Route::post('/announement/store', [AnnounementController::class, 'store'])->name('announement.store');
         Route::get('/announement/read', [AnnounementController::class, 'read'])->name('announement.read');
+        Route::get('/announement/edit/{id}', [AnnounementController::class, 'edit'])->name('announement.edit');
+        Route::post('/announement/update/{id}', [AnnounementController::class, 'update'])->name('announement.update');
+        Route::get('/announement/delete/{id}', [AnnounementController::class, 'delete'])->name('announement.delete');
 
         //Class Management
         Route::get('/class/create', [ClassesController::class, 'index'])->name('class.create');
@@ -78,6 +83,20 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/class/update', [ClassesController::class, 'update'])->name('class.update');
 
         Route::get('/class/delete/{id}', [ClassesController::class, 'delete'])->name('class.delete');
+
+        //Subject Management
+        Route::get('/subject/create', [SubjectController::class, 'index'])->name('subject.create');
+        Route::post('/subject/store', [SubjectController::class, 'store'])->name('subject.store');
+        Route::get('/subject/read', [SubjectController::class, 'read'])->name('subject.read');
+        Route::get('/subject/edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');
+        Route::post('/subject/update', [SubjectController::class, 'update'])->name('subject.update');
+        Route::get('/subject/delete/{id}', [SubjectController::class, 'delete'])->name('subject.delete');
+
+        //Assign Subject To Class Management
+        Route::get('/assign-subject/create', [AssignSubjectToClassController::class, 'index'])->name('assign-subject.create');
+        Route::post('/assign-subject/store', [AssignSubjectToClassController::class, 'store'])->name('assign-subject.store');
+        Route::get('/assign-subject/read', [AssignSubjectToClassController::class, 'read'])->name('assign-subject.read');
+        
 
         //Fee Head Management
         Route::get('/fee-head/create', [FeeHeadController::class, 'index'])->name('fee-head.create');

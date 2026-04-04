@@ -33,4 +33,31 @@ class AnnounementController extends Controller
         return view('admin.announement.list', $data);
     }
 
+    public function edit($id)
+    {
+        $data['accouncement'] = Announement::find($id);
+        return view('admin.announement.edit_form', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'message' => 'required',
+            'type' => 'required',
+        ]);
+
+        $announements = Announement::find($id);
+        $announements->message = $request->message;
+        $announements->type = $request->type;
+        $announements->update();
+        return redirect()->route('announement.read')->with('success', 'Announcement updated successfully');
+    }
+
+    public function delete($id)
+    {
+        $announements = Announement::find($id);
+        $announements->delete();
+        return redirect()->route('announement.read')->with('success', 'Announcement deleted successfully');
+    }
+
 }

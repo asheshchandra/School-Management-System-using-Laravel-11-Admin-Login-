@@ -13,12 +13,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Announement List</h1>
+          <h1>Subject</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Announement List</li>
+            <li class="breadcrumb-item active">Subject List</li>
           </ol>
         </div>
       </div>
@@ -38,7 +38,7 @@
             </div>
             @endif
             <div class="card-header">
-              <h3 class="card-title">Announement List</h3>
+              <h3 class="card-title">Subject List</h3>
             </div>
 
             <div class="card-body">
@@ -46,22 +46,22 @@
                 <thead>
                   <tr>
                     <th>id</th>
-                    <th>Broadcast To</th>
-                    <th>Message</th>
+                    <th>Name</th>
+                    <th>Type</th>
                     <th>Created time</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                @foreach ($announements as $item)
+                @foreach ($subjects as $item)
                   <tr>
                     <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $item->type }}</td>
-                    <td>{{ $item->message }}</td>
                     <td>{{ $item->created_at }}</td>
-                    <td><a href="{{ route('announement.edit', $item->id) }}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="{{ route('announement.delete', $item->id) }}" onclick="return confirm('Are you sure you want to delete this academic year?')" class="btn btn-danger">Delete</a></td>
+                    <td><a href="{{ route('subject.edit', $item->id) }}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ route('subject.delete', $item->id) }}" onclick="return confirm('Are you sure you want to delete this subject?')" class="btn btn-danger">Delete</a></td>
                   </tr>
                 @endforeach
                 </tbody>

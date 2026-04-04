@@ -335,7 +335,7 @@
                         <!-- Announement -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
+                                <i class="nav-icon fas fa-bullhorn"></i>
                                 <p>
                                     Announement
                                     <i class="right fas fa-angle-left"></i>
@@ -352,6 +352,31 @@
                                     <a href="{{route('announement.read')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>View Announements</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Subject -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Subject
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('subject.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Subject</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('subject.read')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Subjects</p>
                                     </a>
                                 </li>
                             </ul>

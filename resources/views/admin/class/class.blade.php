@@ -25,27 +25,26 @@
 
         <div class="col-md-12">
 
-        @if (Session::has('success'))
-        <div class="alert alert-success">
-          {{ Session::get('success') }}
-        </div>
-        @endif
+          @if (Session::has('success'))
+          <div class="alert alert-success">
+            {{ Session::get('success') }}
+          </div>
+          @endif
 
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Add Class</h3>
             </div>
-
-            @error('name')
-            <p class="text-danger">{{ $message }}</p>
-            @enderror
-
             <form action="{{ route('class.store') }}" method="post">
-              @csrf <div class="card-body">
+              @csrf
+              <div class="card-body">
                 <div class="form-group">
                   <label for="name">Class Name</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="Enter Class Name" required>
                 </div>
+                @error('name')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
               </div>
 
               <div class="card-footer">

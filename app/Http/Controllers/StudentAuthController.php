@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Announement;
 use Illuminate\Support\Facades\Hash;
 
 class StudentAuthController extends Controller
@@ -29,7 +30,8 @@ class StudentAuthController extends Controller
 
     public function dashboard()
     {
-        return view('student.dashboard');
+        $data['announement'] = Announement::where('type', 'student')->latest()->limit(1)->get();
+        return view('student.dashboard', $data);
     }
 
     public function logout()
