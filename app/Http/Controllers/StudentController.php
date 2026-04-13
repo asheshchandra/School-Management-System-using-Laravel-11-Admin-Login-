@@ -90,6 +90,7 @@ class StudentController extends Controller
             'phone'          => 'required',
             'gender'         => 'required',
             'email'          => 'required|unique:users,email,' . $request->id,
+            'password'       => 'required',
         ]);
 
         $user = User::findOrFail($request->id);

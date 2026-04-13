@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Teacher | Dashboard</title>
 
     <base href="{{ asset('adminass') }}/">
 
@@ -199,16 +199,24 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                            <a href="{{ route('teacher.dashboard') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('teacher.logout') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
 
                         <!-- Academic Year -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
@@ -230,207 +238,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-
-                        <!-- Class Management -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-graduation-cap"></i>
-                                <p>
-                                    Class Management
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('class.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Class</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('class.read') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Classes</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Fee Head -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-money-bill-wave"></i>
-                                <p>
-                                    Fee Head
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('fee-head.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Fee Head</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('fee-head.read') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Fee Heads</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Fee Structure -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-money-check-alt"></i>
-                                <p>
-                                    Fee Structure
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('fee-structure.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Record</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('fee-structure.read') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Record</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Student -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Student
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('student.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Student</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('student.read')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Students</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Teacher -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                                <p>
-                                    Teacher
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('teacher.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Teacher</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('teacher.read')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Teachers</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Announement -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-bullhorn"></i>
-                                <p>
-                                    Announement
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('announement.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Announement</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('announement.read')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Announements</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Subject -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Subject
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('subject.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Subject</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('subject.read')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Subjects</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Assign Subject -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tasks"></i>
-                                <p>
-                                    Assign Subject
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('assign-subject.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Assign Subject</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('assign-subject.read') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View Assigned</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
 
@@ -441,8 +249,8 @@
         @yield('content')
 
         <footer class="main-footer">
-            <strong>&copy; {{ date('Y') }} <a href="https://adminlte.io/">AdminLTE.io</a>.</strong>
-            All Rights Reserved.
+            <strong>Copyright &copy; {{ date('Y') }} <a href="https://adminlte.io/">AdminLTE.io</a>.</strong>
+            All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
             </div>
@@ -486,7 +294,7 @@
     <script src="dist/js/adminlte2167.js?v=3.2.0"></script>
 
     <script src="dist/js/demo.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <script src="dist/js/pages/dashboard.js"></script>
     @yield('customJs')
 </body>
