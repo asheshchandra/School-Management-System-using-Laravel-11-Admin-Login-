@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\AssignSubjectToClass;
 use App\Models\subject;
 use Illuminate\Http\Request;
 

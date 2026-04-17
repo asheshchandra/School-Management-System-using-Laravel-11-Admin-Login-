@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\AssignTeacherToClass;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -17,9 +17,9 @@ class StudentAuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (Auth::user()->role != 'student') {
-                Auth::logout();
+        if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::guard('student')->user()->role != 'student') {
+                Auth::guard('student')->logout();
                 return redirect()->route('student.login')->with('error', 'You are not authorized to login as student');
             }
             return redirect()->route('student.dashboard');
@@ -34,9 +34,16 @@ class StudentAuthController extends Controller
         return view('student.dashboard', $data);
     }
 
+    public function mySubject()
+    {
+        $class_id = Auth::guard('student')->user()->class_id;
+        $data['my_subject'] = AssignTeacherToClass::where('class_id', $class_id)->with('subject', 'teacher')->get();
+        return view('student.my_subject', $data);
+    }
+
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('student')->logout();
         return redirect()->route('student.login')->with('success', 'Logout successfully');
     }
 
@@ -54,7 +61,7 @@ class StudentAuthController extends Controller
         ]);
         $old_password = $request->old_password;
         $new_password = $request->new_password;
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::guard('student')->user()->id);
         if (Hash::check($old_password, $user->password)){
             $user->password = Hash::make($new_password);
             $user->save();

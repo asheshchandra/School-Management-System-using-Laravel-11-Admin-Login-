@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignTeacherToClass;
+use App\Models\AssignSubjectToClass;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -122,5 +124,12 @@ class TeacherController extends Controller
     {
         Auth::guard('teacher')->logout();
         return redirect()->route('teacher.login')->with('success', 'Logged out successfully');
+    }
+
+    public function myClass()
+    {
+        $teacher_id = Auth::guard('teacher')->user()->id;
+        $data['assign_class'] = AssignTeacherToClass::where('teacher_id', $teacher_id)->with('class', 'subject')->get();
+        return view('teacher.my_class', $data);
     }
 }

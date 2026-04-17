@@ -11,4 +11,18 @@ class AssignTeacherToClass extends Model
         'subject_id',
         'teacher_id',
     ];
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+
+    }
+    public function subject()
+    {
+        return $this->belongsTo(subject::class, 'subject_id');
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 }

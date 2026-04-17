@@ -12,6 +12,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignSubjectToClassController;
 use App\Http\Controllers\AssignTeacherToClassController;
+use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,16 +22,17 @@ Route::get('/', function () {
 // Student Login
 Route::group(['prefix' => 'student'], function () {
     // guest
-    Route::group(['middleware' => 'guest'], function () {
+    Route::group(['middleware' => 'student.guest'], function () {
         Route::get('/login', [StudentAuthController::class, 'index'])->name('student.login');
         Route::post('/login', [StudentAuthController::class, 'authenticate'])->name('student.authenticate');
     });
     // auth
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'student.auth'], function () {
         Route::get('/dashboard', [StudentAuthController::class, 'dashboard'])->name('student.dashboard');
         Route::get('/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
         Route::get('/change-password', [StudentAuthController::class, 'changePassword'])->name('student.change-password');
         Route::post('/update-password', [StudentAuthController::class, 'updatePassword'])->name('student.updatePassword');
+        Route::get('/my-subject', [StudentAuthController::class, 'mySubject'])->name('student.my-subject');
     });
 });
 
@@ -41,6 +43,7 @@ Route::group(['prefix' => 'teacher'], function () {
     });
     Route::group(['middleware' => 'teacher.auth'], function () {
         Route::get('/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
+        Route::get('/my-class', [TeacherController::class, 'myClass'])->name('teacher.my-class');
         Route::get('/logout', [TeacherController::class, 'logout'])->name('teacher.logout');
     });
 });
@@ -63,6 +66,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/academic-year/delete/{id}', [AcademicYearController::class, 'delete'])->name('academic-year.delete');
         Route::get('/academic-year/edit/{id}', [AcademicYearController::class, 'edit'])->name('academic-year.edit');
         Route::post('/academic-year/update', [AcademicYearController::class, 'update'])->name('academic-year.update');
+
+        //Timetable Management
+        Route::get('/timetable/create', [TimetableController::class, 'index'])->name('timetable.create');
+        Route::post('/timetable/store', [TimetableController::class, 'store'])->name('timetable.store');
+        
 
         //Announement Management
         Route::get('/announement/create', [AnnounementController::class, 'index'])->name('announement.create');
@@ -100,6 +108,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/assign-teacher/create', [AssignTeacherToClassController::class, 'index'])->name('assign-teacher.create');
         Route::post('/assign-teacher/store', [AssignTeacherToClassController::class, 'store'])->name('assign-teacher.store');
         Route::get('/findSubject', [AssignTeacherToClassController::class, 'findSubject'])->name('findSubject');
+        Route::get('/assign-teacher/read', [AssignTeacherToClassController::class, 'read'])->name('assign-teacher.read');
+        Route::get('/assign-teacher/edit/{id}', [AssignTeacherToClassController::class, 'edit'])->name('assign-teacher.edit');
+        Route::post('/assign-teacher/update/{id}', [AssignTeacherToClassController::class, 'update'])->name('assign-teacher.update');
+        Route::get('/assign-teacher/delete/{id}', [AssignTeacherToClassController::class, 'delete'])->name('assign-teacher.delete');
         
 
         //Teacher Management

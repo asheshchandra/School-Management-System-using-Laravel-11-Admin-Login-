@@ -30,7 +30,7 @@ class StudentController extends Controller
             'dob'            => 'required',
             'phone'          => 'required',
             'gender'         => 'required',
-            'email'          => 'required',
+            'email'          => 'required|unique:users,email',
             'password'       => 'required|min:6',
         ]);
 
