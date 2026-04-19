@@ -18,9 +18,9 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Dashboard
-            @if (Auth::user()->dob && \Carbon\Carbon::parse(Auth::user()->dob)->isBirthday())
+            @if(Auth::guard('student')->user()->dob && \Carbon\Carbon::parse(Auth::guard('student')->user()->dob)->isBirthday())
             <br>
-            <span class="text-success" style="font-size: 0.8em;">🎉 Happy Birthday, {{ Auth::user()->name }}! 🎂</span>
+            <span class="text-success" style="font-size: 0.8em;">🎉 Happy Birthday, {{ Auth::guard('student')->user()->name }}! 🎂</span>
             @endif
           </h1>
         </div>

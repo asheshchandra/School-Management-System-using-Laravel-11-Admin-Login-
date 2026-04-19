@@ -88,8 +88,8 @@
                   <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->studentAcademicYear->name }}</td>
-                    <td>{{ $item->studentClass->name }}</td>
+                    <td>{{ $item->studentAcademicYear?->name }}</td>
+                    <td>{{ $item->studentClass?->name }}</td>
                     <td>{{ $item->father_name }}</td>
                     <td>{{ $item->mother_name }}</td>
                     <td>{{ $item->dob }}</td>
@@ -102,23 +102,6 @@
                   </tr>
                   @endforeach
                 </tbody>
-                <tfoot>
-                  <!-- <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Academic Year</th>
-                    <th>Class</th>
-                    <th>Father's Name</th>
-                    <th>Mother's Name</th>
-                    <th>DOB</th>
-                    <th>Gender</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Created time</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr> -->
-                </tfoot>
               </table>
             </div>
 
