@@ -70,6 +70,8 @@ Route::group(['prefix' => 'admin'], function () {
         //Timetable Management
         Route::get('/timetable/create', [TimetableController::class, 'index'])->name('timetable.create');
         Route::post('/timetable/store', [TimetableController::class, 'store'])->name('timetable.store');
+        Route::get('/timetable/read', [TimetableController::class, 'read'])->name('timetable.read');
+        Route::get('/timetable/delete/{id}', [TimetableController::class, 'delete'])->name('timetable.delete');
         
 
         //Announement Management

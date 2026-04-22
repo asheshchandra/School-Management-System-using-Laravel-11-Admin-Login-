@@ -40,7 +40,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Class Name</label>
-                                    <select name="class_id" class="form-control">
+                                    <select name="class_id" id="class_id" class="form-control">
                                         <option value="">Select Class</option>
                                         @foreach ($classes as $class)
                                         <option value="{{ $class->id }}" {{ old('class_id') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
@@ -54,11 +54,11 @@
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>Subject Name</label>
-                                        <select name="subject_id" class="form-control">
+                                        <select name="subject_id" id="subject_id" class="form-control">
                                             <option value="">Select Subject</option>
-                                            @foreach ($subjects as $subject)
+                                            <!-- @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}" {{ old('subject_id') == $subject->id ? 'selected' : '' }}>{{ $subject->name }}</option>
-                                            @endforeach
+                                            @endforeach -->
                                         </select>
                                         @error('class_id')
                                         <p class="text-danger">{{ $message }}</p>
@@ -74,25 +74,19 @@
                                             <th>Day</th>
                                             <th>Start time</th>
                                             <th>End time</th>
-                                            <th>Room number</th>
+                                            <th>Room no</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                        $i = 1;
-                                        @endphp
                                         @foreach ($days as $day)
                                         <tr>
                                             <td>{{ $day->name }}</td>
-                                            <input type="hidden" name="timetable[{{ $i }}][day_id]" value="{{ $day->id }}">
-                                            <td><input type="time" name="timetable[{{ $i }}][start_time]"></td>
-                                            <td><input type="time" name="timetable[{{ $i }}][end_time]"></td>
-                                            <td><input type="number" name="timetable[{{ $i }}][room_number]" placeholder="Enter room number"></td>
+                                            <input type="hidden" name="timetable[{{ $loop->index }}][day_id]" value="{{ $day->id }}">
+                                            <td><input type="time" name="timetable[{{ $loop->index }}][start_time]"></td>
+                                            <td><input type="time" name="timetable[{{ $loop->index }}][end_time]"></td>
+                                            <td><input type="number" name="timetable[{{ $loop->index }}][room_no]" placeholder="Enter room no."></td>
                                         </tr>
                                         @endforeach
-                                        @php
-                                        $i++;
-                                        @endphp
                                     </tbody>
                                 </table>
                                 <div class="card-footer">
@@ -106,12 +100,22 @@
     </section>
 </div>
 @endsection
-
 @section('customJs')
-<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
-    $(function() {
-        bsCustomFileInput.init();
-    });
+    $('#class_id').change(function(){
+        const class_id = $(this).val();
+        $.ajax({
+            url:"{{ route('findSubject') }}",
+            type:"get",
+            data:{class_id},
+            dataType:'json',
+            success:function(response){
+               $('#subject_id').find('option').not(':first').remove();
+               $.each(response['subject'], (key, item)=>{
+                $('#subject_id').append(`<option value="${item.subject_id}">${item.subject.name}</option>`)
+               })
+            }
+        })
+    })
 </script>
 @endsection
