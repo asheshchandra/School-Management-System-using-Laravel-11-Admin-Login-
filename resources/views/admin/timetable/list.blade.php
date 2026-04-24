@@ -38,6 +38,26 @@
             </div>
             @endif
             <div class="card-header">
+              <form action="" class="row">
+                <div class="form-group col-md-3">
+                  <select name="class_id" id="class_id" class="form-control @error('class_id') is-invalid @enderror">
+                    <option value="">Select Class</option>
+                    @foreach ($classes as $class)
+                    <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group col-md-3">
+                  <select name="subject_id" id="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
+                    <option value="">Select Subject</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-header">
               <h3 class="card-title">Timetable List</h3>
               <form action="">
                 <div class="row">
@@ -66,8 +86,8 @@
                     <td>{{ $timetable->class->name }}</td>
                     <td>{{ $timetable->subject->name }}</td>
                     <td>{{ $timetable->day->name }}</td>
-                    <td>{{ $timetable->start_time }}</td>
-                    <td>{{ $timetable->end_time }}</td>
+                    <td>{{ \Carbon\Carbon::createFromFormat('H:i', $timetable->start_time)->format('h:i A') }}</td>
+                    <td>{{ \Carbon\Carbon::createFromFormat('H:i', $timetable->end_time)->format('h:i A') }}</td>
                     <td>{{ $timetable->room_no }}</td>
                     <td><a href="{{ route('timetable.delete', $timetable->id) }}" onclick="return confirm('Are you sure you want to delete this timetable?')" class="btn btn-danger">Delete</a></td>
                   </tr>
@@ -123,6 +143,38 @@
       "autoWidth": false,
       "responsive": true,
     });
+
+    function loadSubjects(class_id, selected_subject_id = null) {
+        if(class_id) {
+            $.ajax({
+                url:"{{ route('findSubject') }}",
+                type:"get",
+                data:{class_id},
+                dataType:'json',
+                success:function(response){
+                   $('#subject_id').find('option').not(':first').remove();
+                   $.each(response['subject'], (key, item)=>{
+                    let selected = (selected_subject_id == item.subject_id) ? 'selected' : '';
+                    $('#subject_id').append(`<option value="${item.subject_id}" ${selected}>${item.subject.name}</option>`)
+                   })
+                }
+            });
+        } else {
+            $('#subject_id').find('option').not(':first').remove();
+        }
+    }
+
+    $('#class_id').change(function(){
+        const class_id = $(this).val();
+        loadSubjects(class_id);
+    });
+
+    // Load subjects on page load if class_id is already selected
+    const initialClassId = $('#class_id').val();
+    const initialSubjectId = "{{ request('subject_id') }}";
+    if(initialClassId) {
+        loadSubjects(initialClassId, initialSubjectId);
+    }
   });
 </script>
 @endsection

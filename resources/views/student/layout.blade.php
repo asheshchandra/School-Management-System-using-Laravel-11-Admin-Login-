@@ -206,17 +206,28 @@
                                 </p>
                             </a>
                         </li>
+                        <!-- my subject -->
                         <li class="nav-item">
                             <a href="{{ route('student.my-subject') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     My Subject
                                 </p>
                             </a>
                         </li>
+                        <!-- timetable -->
+                        <li class="nav-item">
+                            <a href="{{ route('student.timetable') }}" class="nav-link">
+                                <i class="nav-icon fas fa-calendar"></i>
+                                <p>
+                                    Timetable
+                                </p>
+                            </a>
+                        </li>
+                        <!-- Logout -->
                         <li class="nav-item">
                             <a href="{{ route('student.logout') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     Logout
                                 </p>

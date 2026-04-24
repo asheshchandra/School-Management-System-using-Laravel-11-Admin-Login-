@@ -54,9 +54,17 @@ class TimetableController extends Controller
         return redirect()->back()->with('success', 'Timetable saved successfully.');
     }
 
-    public function read()
+    public function read(Request $request)
     {
-        $data['timetables'] = Timetable::with('class','subject','day')->get();
+        $data['classes'] = Classes::all();
+        $timetables = Timetable::with('class','subject','day');
+        if($request->class_id){
+            $timetables->where('class_id', $request->class_id);
+        }
+        if($request->subject_id){
+            $timetables->where('subject_id', $request->subject_id);
+        }
+        $data['timetables'] = $timetables->get();
         return view('admin.timetable.list', $data);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\AssignTeacherToClass;
+use App\Models\Timetable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -69,5 +70,22 @@ class StudentAuthController extends Controller
         }else{
             return redirect()->back()->with('error','Invalid old password');
         }
+    }
+
+    public function timetable()
+    {
+        $class_id = Auth::guard('student')->user()->class_id;
+        $timetable = Timetable::with(['day','subject'])->where('class_id', $class_id)->get();
+        $group = [];
+        foreach($timetable as $data){
+            $group[$data->day->name][] = [
+                'subject'=>$data->subject->name,
+                'start_time'=>$data->start_time,
+                'end_time'=>$data->end_time,
+                'room_no'=>$data->room_no
+            ];
+        }
+        $data['timetable'] = $group;
+        return view('student.timetable', $data);
     }
 }

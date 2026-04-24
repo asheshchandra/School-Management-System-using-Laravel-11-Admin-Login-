@@ -102,20 +102,38 @@
 @endsection
 @section('customJs')
 <script>
-    $('#class_id').change(function(){
-        const class_id = $(this).val();
-        $.ajax({
-            url:"{{ route('findSubject') }}",
-            type:"get",
-            data:{class_id},
-            dataType:'json',
-            success:function(response){
-               $('#subject_id').find('option').not(':first').remove();
-               $.each(response['subject'], (key, item)=>{
-                $('#subject_id').append(`<option value="${item.subject_id}">${item.subject.name}</option>`)
-               })
+    $(function() {
+        function loadSubjects(class_id, selected_subject_id = null) {
+            if(class_id) {
+                $.ajax({
+                    url:"{{ route('findSubject') }}",
+                    type:"get",
+                    data:{class_id},
+                    dataType:'json',
+                    success:function(response){
+                       $('#subject_id').find('option').not(':first').remove();
+                       $.each(response['subject'], (key, item)=>{
+                        let selected = (selected_subject_id == item.subject_id) ? 'selected' : '';
+                        $('#subject_id').append(`<option value="${item.subject_id}" ${selected}>${item.subject.name}</option>`)
+                       })
+                    }
+                });
+            } else {
+                $('#subject_id').find('option').not(':first').remove();
             }
-        })
-    })
+        }
+
+        $('#class_id').change(function(){
+            const class_id = $(this).val();
+            loadSubjects(class_id);
+        });
+
+        // Load subjects on page load if class_id is already selected (e.g. from old input)
+        const initialClassId = $('#class_id').val();
+        const initialSubjectId = "{{ old('subject_id') }}";
+        if(initialClassId) {
+            loadSubjects(initialClassId, initialSubjectId);
+        }
+    });
 </script>
 @endsection
